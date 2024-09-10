@@ -1,7 +1,7 @@
 <script>
     export let data;
     
-    const fallBackAvatar = "/fallback-avatar/fallback-avatar.jpeg";
+    const fallBackAvatar = "/fallback-avatar/Dark-side-of-the-moon.jpeg";
 
     function fallBackAvatarError(event) {
     console.log("Error loading image, switching to fallback:", fallBackAvatar);
