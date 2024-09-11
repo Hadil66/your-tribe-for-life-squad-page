@@ -1,22 +1,25 @@
 <script>
-    export let data;
-  </script>
+  export let data;
+</script>
   
-  <h1>squadpage</h1>
+<main>
+    
+  <h1>Dit is de <br>titel</h1>
+  <h2>Dit is een heading</h2>
+  <h3>Dit is een heading</h3>
+  <h4>Dit is een heading</h4>
+  <h5>Dit is een heading</h5>
+  <h6>Dit is een heading</h6>
+
+</main>
   
-  <ul>
-    {#each data.persons as person}
-      <li>
-        {person.name}
-        {person.prefix}
-        {person.surname}
-      </li>
-    {/each}
-  </ul>
-  
-  
-  <style>
-      li {
-          list-style: "";
-      }
-  </style>
+<style>
+  @font-face {
+  font-family: "Inter-Regular";
+  src: url("../fonts/Inter_24pt-Regular.ttf");
+  } 
+
+  main {
+    font-family: "Inter-Regular";
+  }
+</style>
