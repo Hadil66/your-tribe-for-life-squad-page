@@ -1,30 +1,37 @@
 <script>
+    import fallBackAvatar from '/fallback-avatar/Dark-side-of-the-moon.jpeg'
+
     export let data;
-    
-    const fallBackAvatar = "/fallback-avatar/Dark-side-of-the-moon.jpeg";
+    export let avatar = fallBackAvatar
 
     function fallBackAvatarError(event) {
-    console.log("Error loading image, switching to fallback:", fallBackAvatar);
-    event.target.src = fallBackAvatar;
-    event.target.onerror = null; // Prevents infinite loop if fallback also fails
+    console.log('Avatar could not be found, it will be replaced');
+    event.target.src = avatar;
   }
 
-  
 </script>
+
+<main>
   
   <h1>squadpage</h1>
-  
   <ul>
     {#each data.persons as person}
       <li>
-        <img src={person.avatar || fallBackAvatar} 
-        on:error={fallBackAvatarError} alt="Avatar" height="100px" width="100px"/>
+        <img 
+        src={person.avatar || fallBackAvatar} 
+        onerror={fallBackAvatarError} 
+        alt="Avatar" 
+        height="100px"
+        width="100px"
+        />
+
         {person.name}
         {person.prefix}
         {person.surname}
       </li>
     {/each}
   </ul>
+</main>
   
   
   <style>
