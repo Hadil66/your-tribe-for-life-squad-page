@@ -25,16 +25,7 @@
 
 
 <style>
-  @font-face {
-  font-family: "Inter-Regular";
-  src: url("../fonts/Inter_24pt-Regular.ttf");
-  } 
 
-  main {
-    font-family: "Inter-Regular";
-  }
-
-  
   h1 {
     display: flex;
     justify-content: center;
@@ -70,16 +61,16 @@
 
   img {
     border-radius: 0.25em;
-    box-shadow: 0 0.5em 0.8em #aaaaaa;
+    box-shadow: 0 0.5em 0.8em var(--primary-light-color);
   }
 
   .vinyl-record {
     position: relative;
     width: 8em;
     height: 8em;
-    background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, #000 4%);
+    background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, var(--primary-dark-color) 4%);
     border-radius: 50%;
-    border: 0.3em solid #000;
+    border: 0.3em solid var(--primary-dark-color);
   }
 
   .vinyl-record-label img {
@@ -88,7 +79,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    border: 0.1em solid #000;
+    border: 0.1em solid var(--primary-dark-color);
     box-shadow: none;
   }
 </style>

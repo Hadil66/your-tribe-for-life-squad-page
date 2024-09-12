@@ -1,11 +1,62 @@
+@font-face {
+    font-family: "Inter-Regular";
+    src: url("../fonts/Inter_24pt-Regular.ttf");
+} 
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Inter-Regular", Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --primary-light-color: #fff;
+    --primary-dark-color: #121212;
 }
 
 body {
     width: 100vw;
     background-color: bisque;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    --heading-font-size: 50px;
+    --heading-line-height: 90%;
+    --heading-letter-spacing: 0px;
+    --heading-font-weight: 700;
+
+    font-weight: var(--heading-font-weight);
+    line-height: var(--heading-line-height);
+    letter-spacing: var(--heading-letter-spacing);
+}
+
+h1 {
+    font-size: var(--heading-font-size);
+}
+
+h2 {
+    font-size: calc(var(--heading-font-size) - 15px);
+}
+
+h3 {
+    font-size: calc(var(--heading-font-size) - 20px);
+}
+
+h4 {
+    font-size: calc(var(--heading-font-size) - 25px);
+}
+
+h5 {
+    font-size: calc(var(--heading-font-size) - 30px);
+}
+
+h6 {
+    font-size: calc(var(--heading-font-size) - 34px);
 }
