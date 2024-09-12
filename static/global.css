@@ -60,3 +60,31 @@ h5 {
 h6 {
     font-size: calc(var(--heading-font-size) - 34px);
 }
+
+p,
+ul,
+li,
+a {
+    --font-size: 1.1em;
+    --font-color: var(--primary-dark-color);
+    --line-height: 24px;
+
+    font-size: var(--font-size);
+    color: var(--font-color);
+    line-height: var(--line-height);
+}
+
+a {
+    --hyperlink-light-color: #1ed760;
+    --hyperlink-light-color-active: #8bffb4;
+    --hyperlink-dark-color:#00394D;
+    --hyperlink-dark-color-active:#0003c7c5;
+
+    color: var(--hyperlink-dark-color);
+    font-weight: 900;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--hyperlink-dark-color-active);
+}
