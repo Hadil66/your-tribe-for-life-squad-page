@@ -3,22 +3,22 @@
     {
       artist: "charli xcx",
       title: "360",
-      path: "/audio/360.mp3",
+      path: "./audio/360.mp3",
     },
     {
       artist: "Childish Gambino",
       title: "Redbone",
-      path: "/audio/redbone.mp3",
+      path: "./audio/redbone.mp3",
     },
     {
       artist: "hozier",
       title: "Work Song",
-      path: "/audio/work-song.mp3",
+      path: "./audio/work-song.mp3",
     },
     {
       artist: "Tyler, the creator",
       title: "See you again",
-      path: "/audio/see-you-again.mp3",
+      path: "./audio/see-you-again.mp3",
     },
   ];
 
@@ -26,30 +26,34 @@
   let songPlayingIndex = 0;
   let song = null;
 
-  function togglePlaying() {
-    playingState === "paused" ? play() : pause();
+  async function togglePlaying() {
+    playingState === "paused" ? await play() : pause();
   }
 
   function loadSong() {
-    song = new Audio(playlist[songPlayingIndex].audio);
+    song = new Audio(playlist[songPlayingIndex].path); // Fix here, use path instead of audio
     song.volume = 0.2;
-    song.play();
   }
 
-  function play() {
+  async function play() {
     if (playingState === "playing") {
       pause();
     }
 
     playingState = "playing";
     loadSong();
+
+    try {
+      await song.play(); // Ensure play() resolves before continuing
+    } catch (error) {
+      console.error("Failed to play song:", error);
+    }
   }
 
   function playSelectedSong(event) {
     const songIndex = +event.target.dataset.index;
 
     if (songIndex === songPlayingIndex) {
-      songPlayingIndex = null;
       return pause();
     }
 
@@ -58,8 +62,10 @@
   }
 
   function pause() {
-    playingState = "paused";
-    song.pause();
+    if (song) {
+      playingState = "paused";
+      song.pause();
+    }
   }
 
   function previous() {
@@ -73,6 +79,18 @@
     songPlayingIndex += 1;
     play();
   }
+
+  function playRandomSong () {
+    let randomIndex = Math.floor(Math.random() * playlist.length);
+
+    while (randomIndex === songPlayingIndex) {
+        randomIndex = Math.floor(Math.random() * playlist.length);
+    }
+
+    songPlayingIndex = randomIndex;
+    play();
+  }
+
 </script>
 
 <div class="player">
@@ -95,6 +113,7 @@
     <button on:click={togglePlaying}>
       {playingState === "paused" ? "▶️" : "⏯️"}
     </button>
+    <button on:click={playRandomSong}>🔀</button>
     <button on:click={next}>⏩</button>
   </div>
 </div>
