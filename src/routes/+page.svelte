@@ -11,7 +11,7 @@
     {#each data.persons as person}
       <li>
         <button class="vinyl-cover">
-          <img src={person.avatar} alt="{person.name}'s avatar" width="150" height="150" />
+          <img src={person.avatar} class="album-cover" alt="{person.name}'s avatar" width="150" height="150" />
         </button>
         <div class="vinyl-record">
           <div class="vinyl-record-label">
@@ -46,7 +46,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2em 4em;
+    gap: 2em 8em;
   }
 
   li {
@@ -54,30 +54,48 @@
     flex-direction: row;
     align-items: center;
     list-style:"";
+    position: relative;
   }
 
-  button.vinyl-cover {
+  .vinyl-cover {
     border: none;
     background-color: transparent;
     cursor: pointer;
     z-index: 2;
   }
 
+  .album-cover {
+    z-index: 2;
+  }          
+
   img {
     border-radius: 0.25em;
-    box-shadow: 0 0.5em 0.7em #3b3a3a;
+    box-shadow: 0 0.5em 0.8em #aaaaaa;
   }
 
   .vinyl-record {
-    position: relative;
-    width: 9em;
-    height: 9em;
-    background: repeating-radial-gradient(circle at center, #181717, #0f0f0f 3%, #000 4%);
-    box-shadow: 0 0.5em 0.7em #3b3a3a;
+    /* position: relative; */
+    width: 8em;
+    height: 8em;
+    position: absolute;
+    top: 0.5em;
+    left:0.5em;
+    background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, #000 4%);
     border-radius: 50%;
     border: 0.3em solid #000;
-    z-index: 1;
-    margin-left: -4em;
+    transition: transform 3s linear, left 3s linear;
+  }
+
+  /*  hover album cover*/
+  .vinyl-cover:hover + .vinyl-record {
+    transform: rotate(360deg);
+    left: 6.5em;
+  }
+
+  /* unhover image */
+  .vinyl-cover + .vinyl-record {
+    transform: rotate(0deg);
+    left: 0;
   }
 
   .vinyl-record-label img {
