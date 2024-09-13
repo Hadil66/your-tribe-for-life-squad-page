@@ -1,7 +1,8 @@
 <script>
     export let data;
+    import MusicPlayer from '../lib/music-player.svelte';
 </script>
-  
+
 <h1>vinyl records</h1>
 
 <main>
