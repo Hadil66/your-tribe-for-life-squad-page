@@ -21,6 +21,9 @@
       </li>
     {/each} 
   </ul>
+
+  <MusicPlayer />
+
 </main>
 
 
