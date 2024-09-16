@@ -1,38 +1,25 @@
-# create-svelte
+# Squad Page - team 1
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
-## Creating a project
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Lokaal gebruiken
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+1. Om ons project op jouw device te gebruiken, moet je deze lokaal clonen.
+2. Open de folder van dit project
+3. Open de terminal en typ `npm install`
+4. Als je geen errors krijgt, typ dan `npm run dev`
+5. Klik op de link voor de localhost
+6. Have fun!
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## 🧞 Commands
 
-## Developing
+Hier zie je een aantal handige commands:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:5173`      |
+| `npm run build`           | Build your production site                       |
 
-```bash
-npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
