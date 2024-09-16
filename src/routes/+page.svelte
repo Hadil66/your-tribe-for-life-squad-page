@@ -1,6 +1,13 @@
 <script>
     export let data;
+    export let avatar = fallBackAvatar
     import MusicPlayer from '../lib/music-player.svelte';
+    import fallBackAvatar from '/fallback-avatar/Dark-side-of-the-moon.jpeg'
+
+  function fallBackAvatarError(event) {
+    console.log('Avatar could not be found, it will be replaced');
+    event.target.src = avatar;
+  }
 </script>
 
 <h1>vinyl records</h1>
@@ -11,7 +18,7 @@
     {#each data.persons as person}
       <li>
         <button class="vinyl-cover">
-          <img src={person.avatar} class="album-cover" alt="{person.name}'s avatar" width="150" height="150" />
+          <img src={person.avatar || fallBackAvatar} on:error={fallBackAvatarError} class="album-cover" alt="{person.name}'s avatar" width="150" height="150" />
         </button>
         <div class="vinyl-record">
           <div class="vinyl-record-label">
@@ -74,6 +81,7 @@
   img {
     border-radius: 0.25em;
     box-shadow: 0 0.5em 0.8em #aaaaaa;
+        object-fit: cover;
   }
 
   .vinyl-record {
