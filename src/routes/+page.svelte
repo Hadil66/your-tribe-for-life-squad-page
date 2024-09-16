@@ -86,7 +86,7 @@
     background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, #000 4%);
     border-radius: 50%;
     border: 0.3em solid #000;
-    transition: transform 3s linear, left 3s linear;
+    transition: transform 3s linear, left 1.5s linear;
   }
 
   /*  hover album cover*/
