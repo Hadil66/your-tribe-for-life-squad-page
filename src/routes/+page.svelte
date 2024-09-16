@@ -1,7 +1,15 @@
 <script>
     export let data;
+    export let avatar = fallBackAvatar
+    import MusicPlayer from '../lib/music-player.svelte';
+    import fallBackAvatar from '/fallback-avatar/Dark-side-of-the-moon.jpeg'
+
+  function fallBackAvatarError(event) {
+    console.log('Avatar could not be found, it will be replaced');
+    event.target.src = avatar;
+  }
 </script>
-  
+
 <h1>vinyl records</h1>
 
 <main>
@@ -10,16 +18,19 @@
     {#each data.persons as person}
       <li>
         <button class="vinyl-cover">
-          <img src={person.avatar} alt="{person.name}'s avatar" width="150" height="150" />
+          <img src={person.avatar || fallBackAvatar} on:error={fallBackAvatarError} class="album-cover" alt="{person.name}'s avatar" width="150" height="150" />
         </button>
         <div class="vinyl-record">
           <div class="vinyl-record-label">
-            <img src={person.avatar} alt="{person.name}'s avatar" width="45" height="45" />
+            <img src={person.avatar} alt="{person.name}'s avatar" width="50" height="50" />
           </div>
         </div>
       </li>
     {/each} 
   </ul>
+
+  <MusicPlayer />
+
 </main>
 
 
@@ -45,32 +56,58 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2em 4em;
+    gap: 2em 8em;
   }
 
   li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     list-style:"";
-    list-style: none;
+    position: relative;
   }
 
-  button.vinyl-cover {
+  .vinyl-cover {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    z-index: 2;
   }
+
+  .album-cover {
+    z-index: 2;
+  }          
 
   img {
     border-radius: 0.25em;
     box-shadow: 0 0.5em 0.8em var(--primary-light-color);
+        object-fit: cover;
   }
 
   .vinyl-record {
-    position: relative;
+    /* position: relative; */
     width: 8em;
     height: 8em;
+
+    position: absolute;
+    top: 0.5em;
+    left:0.5em;
     background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, var(--primary-dark-color) 4%);
     border-radius: 50%;
     border: 0.3em solid var(--primary-dark-color);
+    transition: transform 3s linear, left 1.5s linear;
+  }
+
+  /*  hover album cover*/
+  .vinyl-cover:hover + .vinyl-record {
+    transform: rotate(360deg);
+    left: 6.5em;
+  }
+
+  /* unhover image */
+  .vinyl-cover + .vinyl-record {
+    transform: rotate(0deg);
+    left: 0;
   }
 
   .vinyl-record-label img {
