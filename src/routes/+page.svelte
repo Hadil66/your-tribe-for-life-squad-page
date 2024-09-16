@@ -80,7 +80,7 @@
 
   img {
     border-radius: 0.25em;
-    box-shadow: 0 0.5em 0.8em #aaaaaa;
+    box-shadow: 0 0.5em 0.8em var(--primary-light-color);
         object-fit: cover;
   }
 
@@ -88,12 +88,13 @@
     /* position: relative; */
     width: 8em;
     height: 8em;
+
     position: absolute;
     top: 0.5em;
     left:0.5em;
-    background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, #000 4%);
+    background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, var(--primary-dark-color) 4%);
     border-radius: 50%;
-    border: 0.3em solid #000;
+    border: 0.3em solid var(--primary-dark-color);
     transition: transform 3s linear, left 1.5s linear;
   }
 
@@ -115,7 +116,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    border: 0.1em solid #000;
+    border: 0.1em solid var(--primary-dark-color);
     box-shadow: none;
   }
 </style>
