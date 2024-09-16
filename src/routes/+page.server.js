@@ -9,5 +9,3 @@ export async function load() {
     persons: persons.data
   }
 }
-
-
