@@ -82,8 +82,8 @@
 
   img {
     border-radius: 0.25em;
-    box-shadow: 0 0.5em 0.8em var(--primary-light-color);
-    object-fit: cover;
+    box-shadow: 0 0.5em 0.8em var(--primary-dark-color);
+        object-fit: cover
   }
 
   .vinyl-record {
