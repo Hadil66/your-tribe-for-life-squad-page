@@ -1,8 +1,4 @@
 <script>
-<<<<<<< Updated upstream
-    export let data;
-    import MusicPlayer from '../lib/music-player.svelte';
-=======
   export let data;
   import MusicPlayer from "../lib/music-player.svelte";
 
@@ -13,7 +9,6 @@
     console.log("Avatar could not be found, it will be replaced");
     event.target.src = avatar;
   }
->>>>>>> Stashed changes
 </script>
 
 <h1>vinyl records</h1>
@@ -24,9 +19,6 @@
     {#each data.persons as person}
       <li>
         <button class="vinyl-cover">
-<<<<<<< Updated upstream
-          <img src={person.avatar} alt="{person.name}'s avatar" width="150" height="150" />
-=======
           <img
             src={person.avatar || fallBackAvatar}
             on:error={fallBackAvatarError}
@@ -35,7 +27,6 @@
             width="150"
             height="150"
           />
->>>>>>> Stashed changes
         </button>
         <div class="vinyl-record">
           <div class="vinyl-record-label">
@@ -81,12 +72,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-<<<<<<< Updated upstream
-    list-style:"";
-=======
     list-style: "";
     position: relative;
->>>>>>> Stashed changes
   }
 
   button.vinyl-cover {
@@ -96,30 +83,16 @@
     z-index: 2;
   }
 
-<<<<<<< Updated upstream
-=======
   .album-cover {
     z-index: 2;
   }
 
->>>>>>> Stashed changes
   img {
     border-radius: 0.25em;
     box-shadow: 0 0.5em 0.7em #3b3a3a;
   }
 
   .vinyl-record {
-<<<<<<< Updated upstream
-    position: relative;
-    width: 9em;
-    height: 9em;
-    background: repeating-radial-gradient(circle at center, #181717, #0f0f0f 3%, #000 4%);
-    box-shadow: 0 0.5em 0.7em #3b3a3a;
-    border-radius: 50%;
-    border: 0.3em solid #000;
-    z-index: 1;
-    margin-left: -4em;
-=======
     --ratio-vinyl: 7em;
     width: var(--ratio-vinyl);
     height: var(--ratio-vinyl);
@@ -149,7 +122,6 @@
   .vinyl-cover + .vinyl-record {
     transform: rotate(0deg);
     left: 0;
->>>>>>> Stashed changes
   }
 
   .vinyl-record-label img {
