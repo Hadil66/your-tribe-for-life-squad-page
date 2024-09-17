@@ -1,31 +1,25 @@
-> _Fork_ deze leertaak en ga aan de slag. Onderstaande outline ga je gedurende deze taak in jouw eigen GitHub omgeving uitwerken. De instructie vind je in: [docs/INSTRUCTIONS.md](docs/INSTRUCTIONS.md)
+# Squad Page - team 1
 
-# Titel
-<!-- Geef je project een titel en schrijf in één zin wat het is -->
 
-## Inhoudsopgave
 
-  * [Beschrijving](#beschrijving)
-  * [Kenmerken](#kenmerken)
-  * [Installatie](#installatie)
-  * [Gebruik](#gebruik)
-  * [Bronnen](#bronnen)
-  * [Licentie](#licentie)
+## Lokaal gebruiken
 
-## Beschrijving
-<!-- In de Beschrijving staat hoe je project er uit ziet, hoe het werkt en wat je er mee kan. -->
-<!-- Voeg een mooie poster visual toe 📸 -->
-<!-- Voeg een link toe naar Github Pages 🌐-->
+1. Om ons project op jouw device te gebruiken, moet je deze lokaal clonen.
+2. Open de folder van dit project
+3. Open de terminal en typ `npm install`
+4. Als je geen errors krijgt, typ dan `npm run dev`
+5. Klik op de link voor de localhost
+6. Have fun!
 
-## Kenmerken
-<!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met Javascript gedaan en hoe? Misschien heb je een framwork of library gebruikt? -->
+## 🧞 Commands
 
-## Installatie
+Hier zie je een aantal handige commands:
 
-## Gebruik
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:5173`      |
+| `npm run build`           | Build your production site                       |
 
-## Bronnen
 
-## Licentie
 
-This project is licensed under the terms of the [MIT license](./LICENSE).
