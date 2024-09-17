@@ -17,7 +17,7 @@
       <li>
         <button class="vinyl-cover">
           <img 
-            src={(person.avatar == '') ? fallbackAvatar : person.avatar} 
+            src={person.imageHasError || !person.avatar ? fallbackAvatar : person.avatar} 
             on:error={() => fallBackAvatarError(person)} 
             class="album-cover" 
             alt="{person.name}'s avatar" 
@@ -28,7 +28,7 @@
         <div class="vinyl-record">
           <div class="vinyl-record-label">
             <img 
-              src={(person.avatar == '') ? fallbackAvatar : person.avatar} 
+              src={person.imageHasError || !person.avatar ? fallbackAvatar : person.avatar} 
               on:error={() => fallBackAvatarError(person)} 
               alt="{person.name}'s avatar" 
               width="50" 
