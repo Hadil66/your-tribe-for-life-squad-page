@@ -90,7 +90,7 @@
     play();
   }
 
-  export { playRandomSong };
+  export { playRandomSong, pause, togglePlaying };
 </script>
 
 <div class="player">

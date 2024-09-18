@@ -1,54 +1,109 @@
 <script>
   export let data;
-  import MusicPlayer from '../lib/music-player.svelte';
+  import MusicPlayer from "../lib/music-player.svelte";
+  import PersonDetail from "$lib/PersonDetail.svelte";
 
+  let persons = [];
+  let selectedPersonId = null;
   let musicPlayerRef;
 
+  // Fetch the list of persons from Directus
+  export async function load({ fetch }) {
+    const url = "https://fdnd.directus.app/items/person/";
+    const response = await fetch(url);
+    const json = await response.json();
+    persons = json.data;
+  }
+
+  // Combined function to play music and show person details
+  function handlePersonClick(id) {
+    selectedPersonId = id;
+    playPersonTrack();
+  }
+
+  // Function to close the detail view
+  function closePersonDetail() {
+    selectedPersonId = null;
+    musicPlayerRef.togglePlaying()
+  }
+
+  // Function to play a random song
   function playPersonTrack() {
-    // Trigger the MusicPlayer to play a random song
-    musicPlayerRef.playRandomSong();
+    musicPlayerRef.playRandomSong(); // This assumes the musicPlayer has a playRandomSong method
   }
 </script>
 
 <h1>vinyl records</h1>
-
 <main>
   <h2>pick a track</h2>
   <ul>
     {#each data.persons as person}
       <li>
-        <!-- No need to pass index anymore -->
-        <button class="vinyl-cover" on:click={playPersonTrack}>
-          <img 
-            src={person.avatar} 
-            class="album-cover" 
-            alt="{person.name}'s avatar" 
-            width="150" 
-            height="150" 
-          />       
+        <button class="vinyl-cover" on:click={() => handlePersonClick(person.id)}>
+          <img
+            src={person.avatar}
+            class="album-cover"
+            alt="{person.name}'s avatar"
+            width="150"
+            height="150"
+          />
         </button>
         <div class="vinyl-record">
           <div class="vinyl-record-label">
-            <img 
-              src={person.avatar} 
-              class="album-cover" 
-              alt="{person.name}'s avatar" 
-              width="50" 
-              height="50" 
-            />       
+            <img
+              src={person.avatar}
+              class="album-cover"
+              alt="{person.name}'s avatar"
+              width="50"
+              height="50"
+            />
           </div>
         </div>
       </li>
-    {/each} 
+    {/each}
   </ul>
 
-  <!-- Bind the MusicPlayer component -->
-  <MusicPlayer bind:this={musicPlayerRef} />
+  {#if selectedPersonId}
+    <!-- Correctly pass the personId prop to PersonDetail -->
+    <div class="slide-in slide-in-active">
+      <PersonDetail personId={selectedPersonId} />
+      <button class="close-btn" on:click={closePersonDetail}>Close</button>
+    </div>
+    <MusicPlayer bind:this={musicPlayerRef} />
+  {/if}
 
 </main>
 
 
 <style>
+
+  /* slide in detail component */
+
+  /* Add your styling here */
+  .slide-in {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50vh;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+  }
+
+  .slide-in-active {
+    transform: translateY(0);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: red;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+  }
+
   h1 {
     display: flex;
     justify-content: center;
