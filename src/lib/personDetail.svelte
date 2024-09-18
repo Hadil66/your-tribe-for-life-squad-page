@@ -31,22 +31,21 @@
   </div>
 {:else if personId}
   <p>Loading person details...</p>
-{:else}
-  <p>Select a person to view details.</p>
 {/if}
+
 
 <style>
   .person-detail {
     padding: 1rem;
     background-color: #f9f9f9;
+    color: black;
     border-top: 1px solid #ccc;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 40vh;
     transform: translateY(100%);
     transition: transform 0.3s ease-out;
     overflow: auto;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+
+    border: 10px solid red;
   }
 </style>
