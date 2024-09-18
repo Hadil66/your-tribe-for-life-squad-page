@@ -70,6 +70,10 @@
     list-style:"";
     position: relative;
     background-color: var(--primary-light-color);
+
+    --ratio-vinyl: 150px;
+    width: var(--ratio-vinyl);
+    height: var(--ratio-vinyl);
   }
 
   .vinyl-cover {
@@ -86,11 +90,11 @@
   img {
     border-radius: 0.25em;
     box-shadow: 0 0.5em 0.8em var(--primary-dark-color);
-        object-fit: cover
+    object-fit: cover
   }
 
   .vinyl-record {
-    --ratio-vinyl: 7em;
+    --ratio-vinyl: 6em;
     width: var(--ratio-vinyl);
     height: var(--ratio-vinyl);
 
