@@ -24,7 +24,7 @@
   // Function to close the detail view
   function closePersonDetail() {
     selectedPersonId = null;
-    musicPlayerRef.togglePlaying()
+    musicPlayerRef.pause()
   }
 
   // Function to play a random song
@@ -81,12 +81,15 @@
 
   /* Add your styling here */
   .slide-in {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
     height: 50vh;
     transform: translateY(100%);
     transition: transform 0.3s ease-out;
+    z-index: 100;
+
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    width: 100vw;
   }
 
   .slide-in-active {
@@ -96,7 +99,7 @@
   .close-btn {
     position: absolute;
     top: 1rem;
-    right: 1rem;
+    left: 1rem;
     background-color: red;
     color: white;
     padding: 0.5rem;
@@ -132,6 +135,8 @@
     align-items: center;
     list-style: "";
     position: relative;
+    height: 150px;
+    width: 150px;
   }
 
   .vinyl-cover {
