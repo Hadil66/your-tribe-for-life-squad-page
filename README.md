@@ -30,7 +30,7 @@ Dit project is gebouwed met Sveltekit als framework en Directus als CMS.
 ### Bronnen
 
 - [Sveltekit Docs](https://kit.svelte.dev/)
-- [Getting started with Sveltekit and Directus]([url](https://docs.directus.io/blog/getting-started-directus-sveltekit.html))
+- [Getting started with Directus and Sveltekit](https://docs.directus.io/blog/getting-started-directus-sveltekit.html)
 
 
 
