@@ -1,12 +1,7 @@
 <script>
   export let data;
   import MusicPlayer from '../lib/music-player.svelte';
-  import fallbackAvatar from '/fallback-avatar/darksideofthemoon.jpeg';
 
-  function fallBackAvatarError(person) {
-    console.log('Avatar could not be found, it will be replaced');
-    person.imageHasError = true;  
-  }
 </script>
 <h1>vinyl records</h1>
 
@@ -17,8 +12,7 @@
       <li>
         <button class="vinyl-cover">
           <img 
-            src={person.imageHasError || !person.avatar ? fallbackAvatar : person.avatar} 
-            on:error={() => fallBackAvatarError(person)} 
+            src={person.avatar}
             class="album-cover" 
             alt="{person.name}'s avatar" 
             width="150" 
@@ -28,8 +22,7 @@
         <div class="vinyl-record">
           <div class="vinyl-record-label">
             <img 
-              src={person.imageHasError || !person.avatar ? fallbackAvatar : person.avatar} 
-              on:error={() => fallBackAvatarError(person)} 
+              src={person.avatar}
               alt="{person.name}'s avatar" 
               width="50" 
               height="50" 
@@ -130,3 +123,4 @@
     box-shadow: none;
   }
 </style>
+
