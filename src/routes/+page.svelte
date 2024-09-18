@@ -69,6 +69,7 @@
     align-items: center;
     list-style:"";
     position: relative;
+    background-color: var(--primary-light-color);
   }
 
   .vinyl-cover {
