@@ -1,13 +1,15 @@
 <script>
   export let data;
   import MusicPlayer from '../lib/music-player.svelte';
-  import fallbackAvatar from '/fallback-avatar/darksideofthemoon.jpeg';
 
-  function fallBackAvatarError(person) {
-    console.log('Avatar could not be found, it will be replaced');
-    person.imageHasError = true;  
+  let musicPlayerRef;
+
+  function playPersonTrack() {
+    // Trigger the MusicPlayer to play a random song
+    musicPlayerRef.playRandomSong();
   }
 </script>
+
 <h1>vinyl records</h1>
 
 <main>
@@ -15,10 +17,10 @@
   <ul>
     {#each data.persons as person}
       <li>
-        <button class="vinyl-cover">
+        <!-- No need to pass index anymore -->
+        <button class="vinyl-cover" on:click={playPersonTrack}>
           <img 
-            src={person.imageHasError || !person.avatar ? fallbackAvatar : person.avatar} 
-            on:error={() => fallBackAvatarError(person)} 
+            src={person.avatar} 
             class="album-cover" 
             alt="{person.name}'s avatar" 
             width="150" 
@@ -28,26 +30,25 @@
         <div class="vinyl-record">
           <div class="vinyl-record-label">
             <img 
-              src={person.imageHasError || !person.avatar ? fallbackAvatar : person.avatar} 
-              on:error={() => fallBackAvatarError(person)} 
+              src={person.avatar} 
+              class="album-cover" 
               alt="{person.name}'s avatar" 
               width="50" 
               height="50" 
-            />
+            />       
           </div>
         </div>
       </li>
     {/each} 
   </ul>
 
-  <MusicPlayer />
+  <!-- Bind the MusicPlayer component -->
+  <MusicPlayer bind:this={musicPlayerRef} />
 
 </main>
 
 
-
 <style>
-
   h1 {
     display: flex;
     justify-content: center;
@@ -74,7 +75,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    list-style:"";
+    list-style: "";
     position: relative;
   }
 
@@ -87,12 +88,12 @@
 
   .album-cover {
     z-index: 2;
-  }          
+  }
 
   img {
     border-radius: 0.25em;
     box-shadow: 0 0.5em 0.8em var(--primary-dark-color);
-        object-fit: cover
+    object-fit: cover;
   }
 
   .vinyl-record {
@@ -102,10 +103,17 @@
 
     position: absolute;
 
-    background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, var(--primary-dark-color) 4%);
+    background: repeating-radial-gradient(
+      circle at center,
+      #1a1919,
+      #1d1c1c 3%,
+      var(--primary-dark-color) 4%
+    );
     border-radius: 50%;
     border: 0.3em solid var(--primary-dark-color);
-    transition: transform 3s linear, left 1.5s linear;
+    transition:
+      transform 3s linear,
+      left 1.5s linear;
   }
 
   /*  hover album cover*/

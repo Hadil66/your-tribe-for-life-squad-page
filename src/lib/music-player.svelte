@@ -31,7 +31,7 @@
   }
 
   function loadSong() {
-    song = new Audio(playlist[songPlayingIndex].path); // Fix here, use path instead of audio
+    song = new Audio(playlist[songPlayingIndex].path);
     song.volume = 0.2;
   }
 
@@ -44,21 +44,10 @@
     loadSong();
 
     try {
-      await song.play(); // Ensure play() resolves before continuing
+      await song.play();
     } catch (error) {
       console.error("Failed to play song:", error);
     }
-  }
-
-  function playSelectedSong(event) {
-    const songIndex = +event.target.dataset.index;
-
-    if (songIndex === songPlayingIndex) {
-      return pause();
-    }
-
-    songPlayingIndex = songIndex;
-    play();
   }
 
   function pause() {
@@ -68,29 +57,40 @@
     }
   }
 
-  function previous() {
-    if (songPlayingIndex <= 0) return;
-    songPlayingIndex -= 1;
-    play();
-  }
-
   function next() {
     if (songPlayingIndex >= playlist.length - 1) return;
     songPlayingIndex += 1;
     play();
   }
 
-  function playRandomSong () {
+  function previous() {
+    if (songPlayingIndex <= 0) return;
+    songPlayingIndex -= 1;
+    play();
+  }
+
+  function playSongAtIndex(index) {
+    if (index === songPlayingIndex && playingState === "playing") {
+      pause();
+    } else {
+      songPlayingIndex = index;
+      play();
+    }
+  }
+  function playRandomSong() {
+    // Pick a random song index that is different from the current one
     let randomIndex = Math.floor(Math.random() * playlist.length);
 
+    // Ensure we don't replay the same song consecutively
     while (randomIndex === songPlayingIndex) {
-        randomIndex = Math.floor(Math.random() * playlist.length);
+      randomIndex = Math.floor(Math.random() * playlist.length);
     }
 
     songPlayingIndex = randomIndex;
     play();
   }
 
+  export { playRandomSong };
 </script>
 
 <div class="player">
@@ -98,7 +98,7 @@
     {#each playlist as song, index}
       <div class:playing={index === songPlayingIndex} class="song">
         <span>{index + 1}.</span>
-        <button data-index={index} on:click={playSelectedSong}>
+        <button data-index={index} on:click={() => playSongAtIndex(index)}>
           {playingState === "playing" && index === songPlayingIndex
             ? "⏯️"
             : "▶️"}
