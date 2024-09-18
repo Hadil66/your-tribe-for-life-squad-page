@@ -4,11 +4,11 @@ Ontwerp en maak met een team een overzicht van jouw tribe met alle online visite
 
 
 ## Inhoudsopgave 📓
-- Beschrijving
-Kenmerken
-Installatie
-Bronnen
-Licentie
+- [Beschrijving](#Beschrijving)
+- [Kenmerken](#Kenmerken)
+- [Installatie](#Installatie)
+- [Bronnen](#Bronnen)
+
 
 ## Beschrijving
 
