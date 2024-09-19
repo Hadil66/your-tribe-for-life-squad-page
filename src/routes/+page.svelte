@@ -48,6 +48,29 @@
 
   <MusicPlayer />
 
+  <!-- condition om info popup te openen -->
+
+  {#if showPopup && selectedPerson}
+    <div class="popup">
+      <div class="popup-content">
+        <button class="close-button" on:click={closePopup}>×</button>
+        <h3>Credits</h3>
+        <div class="person-info">
+          <img src={selectedPerson.avatar} alt="{selectedPerson.name}'s avatar" width="100" height="100"/>
+          <div>
+            <h4>{selectedPerson.prefix} {selectedPerson.name} {selectedPerson.surname}</h4>
+            <p><strong>Github:</strong> <a href={`https://github.com/${selectedPerson.github_handle}`} target="_blank">{selectedPerson.github_handle}</a></p>
+            <p><strong>Bio:</strong> {selectedPerson.bio}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {/if}
+
+  <!--info button -->
+
+  <button class="info-button" on:click={() => openPopup(48)}>Info</button> <!-- При нажатии передаем id = 48 -->
+
 </main>
 
 
