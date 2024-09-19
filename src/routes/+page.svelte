@@ -2,15 +2,25 @@
   export let data;
   import MusicPlayer from '../lib/music-player.svelte';
 
+  let vinylcoverFocus = -1; 
+  const handleFocus = (vinylIndex) => {
+    vinylcoverFocus = vinylIndex;
+  };
+  const handleNoFocus = () => {
+    vinylcoverFocus = -1; 
+  };
+
 </script>
 <h1>vinyl records</h1>
 
 <main>
   <h2>pick a track</h2>
   <ul>
-    {#each data.persons as person}
-      <li>
-        <button class="vinyl-cover">
+    {#each data.persons as person, vinylIndex}
+      <li class:no-focus={vinylcoverFocus !== -1 && vinylcoverFocus !== vinylIndex}>
+        <button class="vinyl-cover" on:focus={() => handleFocus(vinylIndex)} 
+          on:blur={handleNoFocus}
+          aria-label="Focus on {person.name}">
           <img 
             src={person.avatar}
             class="album-cover" 
@@ -78,6 +88,16 @@
     z-index: 2;
   }
 
+  .vinyl-cover:focus {
+    transform: scale(1.1);
+  }
+
+  li.no-focus {
+    filter: blur(1px) grayscale(90%);
+    /* opacity: 0.7; */
+  }
+
+
   .album-cover {
     z-index: 2;
   }          
@@ -122,5 +142,6 @@
     border: 0.1em solid var(--primary-dark-color);
     box-shadow: none;
   }
+
 </style>
 
