@@ -20,6 +20,46 @@
       title: "See you again",
       path: "./audio/see-you-again.mp3",
     },
+    {
+      artist:"HYUKOH",
+      title: "Surf boy",
+      path: "./audio/surf-boy.mp3",
+    },
+    {
+      artist:"K3",
+      title: "Tele Romeo",
+      path: "./audio/tele-romeo.mp3",
+    },
+    {
+      artist:"Lady Gaga, Bruno Mars",
+      title: "Die With A Smile",
+      path: "./audio/die-with-a-smile.mp3",
+    },
+    {
+      artist:"PSY",
+      title: "Gangnam Style",
+      path: "./audio/gangnam-style.mp3",
+    },
+    {
+      artist:"The Beatles",
+      title: "Hey Jude",
+      path: "./audio/hey-jude.mp3",
+    },
+    {
+      artist:"Yes-R",
+      title: "Uit Elkaar",
+      path: "./audio/uit-elkaar.mp3",
+    },
+    {
+      artist:"Golden Ring Ensemble",
+      title: "Karabuschka dance",
+      path: "./audio/karabuschka-dance.mp3",
+    },
+    {
+      artist:"Coldplay",
+      title: "Yellow",
+      path: "./audio/yellow.mp3",
+    },
   ];
 
   let playingState = "paused";
