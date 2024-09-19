@@ -73,6 +73,7 @@
   {#if selectedPersonId}
     <!-- Correctly pass the personId prop to PersonDetail -->
     <div class="slide-in slide-in-active">
+      
       <PersonDetail personId={selectedPersonId} />
       <button class="close-btn" on:click={closePersonDetail}>Close</button>
     </div>
