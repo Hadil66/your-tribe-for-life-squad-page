@@ -1,6 +1,19 @@
 <script>
   export let data;
   import MusicPlayer from '../lib/music-player.svelte';
+  let selectedPerson = null;
+  let showPopup = false;
+
+  // funtie openen popup met data van persoon adhv gegeven id
+    function openPopup(personId) {
+    selectedPerson = data.persons.find(person => person.id === personId);
+    showPopup = true;
+  }
+
+  // functie sluiten popup
+  function closePopup() {
+    showPopup = false;
+  }
 
   let needlePlay = false
   let spinningVinyl = false
@@ -41,6 +54,30 @@
   </ul>
 
   <MusicPlayer />
+
+
+  <!-- condition om info popup te openen -->
+
+  {#if showPopup && selectedPerson}
+    <div class="popup">
+      <div class="popup-content">
+        <button class="close-button" on:click={closePopup}>×</button>
+        <h3>Credits</h3>
+        <div class="person-info">
+          <img src={selectedPerson.avatar} alt="{selectedPerson.name}'s avatar" width="100" height="100"/>
+          <div>
+            <h4>{selectedPerson.prefix} {selectedPerson.name} {selectedPerson.surname}</h4>
+            <p><strong>Github:</strong> <a href={`https://github.com/${selectedPerson.github_handle}`} target="_blank">{selectedPerson.github_handle}</a></p>
+            <p><strong>Bio:</strong> {selectedPerson.bio}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {/if}
+
+  <!--info button -->
+
+  <button class="info-button" on:click={() => openPopup(48)}>i</button> 
 
    <!-- Naald --> 
   <div class="recordplayer">
@@ -83,7 +120,6 @@
   </div>
 
     <button class="play-button" on:click="{togglePlay}"> Play </button>  
-
 
 </main>
 
@@ -171,6 +207,85 @@
     border: 0.1em solid var(--primary-dark-color);
     box-shadow: none;
   }
+
+   /* - - - info button - - - */
+
+   .info-button {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    border-radius: 50%;
+    border: 1.5px solid black;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-button:hover {
+    background-color: black;
+    color: white;
+  }
+
+  /* - - - - popup - - - - */
+
+  .popup {
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(34, 34, 34, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-content {
+    background: #333;
+    padding: 20px;
+    width: 80%;
+    position: relative;
+    color: white;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .person-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  /* mediaqueries */
+  @media (max-width: 768px) {
+    .popup-content {
+      align-self: self-end;
+      width: 100%;
+      height: 70%;
+    }
+
+    .info-button {
+      width: 20px;
+      height: 20px;
+      font-size: 17px;
+    }
+  }
+
+</style>
 
     /* RECORDPLAYER ANIMATION (FOR THE POP-UP) */
 
