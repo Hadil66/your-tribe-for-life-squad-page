@@ -159,6 +159,83 @@
     box-shadow: none;
   }
 
+   /* - - - info button - - - */
+
+   .info-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .info-button:hover {
+    background-color: #555;
+  }
+
+  /* - - - - popup - - - - */
+
+  .popup {
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-content {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    position: relative;
+    color: white;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .person-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .popup-content {
+      width: 90%;
+    }
+
+    .info-button {
+      width: 50px;
+      height: 50px;
+      font-size: 14px;
+    }
+  }
 
 </style>
 
