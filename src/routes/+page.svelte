@@ -73,7 +73,7 @@
 
   .vinyl-cover {
     border: none;
-    background-color: transparent;
+    background-color: bisque;
     cursor: pointer;
     z-index: 2;
   }
