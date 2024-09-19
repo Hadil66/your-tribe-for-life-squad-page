@@ -69,7 +69,7 @@
 
   <!--info button -->
 
-  <button class="info-button" on:click={() => openPopup(48)}>Info</button> <!-- При нажатии передаем id = 48 -->
+  <button class="info-button" on:click={() => openPopup(48)}>i</button> <!-- При нажатии передаем id = 48 -->
 
 </main>
 
@@ -162,25 +162,23 @@
    /* - - - info button - - - */
 
    .info-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #333;
-    color: white;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
     border-radius: 50%;
-    border: none;
-    font-size: 16px;
+    border: 1.5px solid black;
+    font-size: 24px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 
   .info-button:hover {
-    background-color: #555;
+    background-color: black;
+    color: white;
   }
 
   /* - - - - popup - - - - */
@@ -192,7 +190,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(34, 34, 34, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,8 +199,7 @@
   .popup-content {
     background: #333;
     padding: 20px;
-    border-radius: 10px;
-    width: 300px;
+    width: 80%;
     position: relative;
     color: white;
   }
@@ -224,16 +221,18 @@
     align-items: center;
   }
 
-  /* Адаптивность */
+  /* mediaqueries */
   @media (max-width: 768px) {
     .popup-content {
-      width: 90%;
+      align-self: self-end;
+      width: 100%;
+      height: 70%;
     }
 
     .info-button {
-      width: 50px;
-      height: 50px;
-      font-size: 14px;
+      width: 20px;
+      height: 20px;
+      font-size: 17px;
     }
   }
 
