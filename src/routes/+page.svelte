@@ -8,6 +8,7 @@
   let persons = [];
   let selectedPersonId = null;
   let musicPlayerRef;
+  let PersonDetailRef;
 
   // Fetch the list of persons from Directus
   export async function load({ fetch }) {
@@ -17,6 +18,9 @@
     persons = json.data;
   }
 
+  function playPersonTrack() {
+    musicPlayerRef.playRandomSong(); // Play a random song from the music player
+  }
   // Function to handle the click, select the person, and play the music
   async function handlePersonClick(id) {
     selectedPersonId = id; // First, set the selected person
@@ -24,11 +28,11 @@
     await tick(); // Wait for the reactive update to take effect
 
     playPersonTrack(); // Then play the music
+
+    PersonDetailRef.togglePlay()
   }
 
-  function playPersonTrack() {
-    musicPlayerRef.playRandomSong(); // Play a random song from the music player
-  }
+
 
   // Function to close the detail view
   function closePersonDetail() {
@@ -74,7 +78,7 @@
     <!-- Correctly pass the personId prop to PersonDetail -->
     <div class="slide-in slide-in-active">
       
-      <PersonDetail personId={selectedPersonId} />
+      <PersonDetail bind:this={PersonDetailRef} personId={selectedPersonId} />
       <button class="close-btn" on:click={closePersonDetail}>Close</button>
     </div>
     <MusicPlayer bind:this={musicPlayerRef} />

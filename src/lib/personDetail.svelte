@@ -29,14 +29,20 @@
     needlePlay = !needlePlay;
     spinningVinyl = !spinningVinyl;
   }
+
+  export { togglePlay };
 </script>
 
 {#if person}
   <div class="recordplayer">
+    <div class="vinyl-record" class:spinningVinyl>
+      <div class="vinyl-record-label">
+        <img src={person.avatar} width="50" height="50" />
+      </div>
+    </div>
     <div class="needle-container">
       <svg
         class:needlePlay
-        on:click={() => (needlePlay = !needlePlay)}
         width="66"
         height="237"
         viewBox="0 0 66 237"
@@ -53,6 +59,7 @@
             stroke="#3E3D3D"
           />
           <path
+            class="needle"
             d="M23.9584 0.0568804L43.75 0.103582L43.702 20.4708L38.0472 20.4574L37.9912 44.2191L47.0388 44.2405L46.9934 63.4762L38.2285 63.4555L37.6601 184.526L41.0342 192.455L29.0752 228.07L14.9557 220.681L29.1633 190.73L29.178 184.506L29.202 174.323L29.4637 63.4348L21.547 63.4161L21.5924 44.1804L29.5091 44.1991L29.5651 20.4374L23.9104 20.4241L23.9584 0.0568804Z"
             fill="black"
           />
@@ -100,14 +107,6 @@
         <li class="button2"></li>
       </ul>
     </div>
-    <img
-      class="vinyl-record-label"
-      class:spinningVinyl
-      on:click={togglePlay}
-      src={person.avatar}
-      width="50"
-      height="50"
-    />
   </div>
 
   <section class="person-info">
@@ -122,6 +121,10 @@
 
 <style>
   /* RECORDPLAYER ANIMATION (FOR THE POP-UP) */
+  li {
+    list-style: "";
+  }
+
   .recordplayer {
     height: 22em;
     width: 25em;
@@ -181,13 +184,17 @@
     align-items: flex-end;
     width: 25em;
   }
-  svg {
-    transition: transform 0.8s ease;
-    transform-origin: top center;
-  }
 
   .needlePlay {
-    transform: rotate(45deg);
+    transform-origin: 25%;
+    animation: needlePlay 1s ease-in-out 0.5s forwards;
+  }
+
+  @keyframes needlePlay {
+    to {
+      transform: rotate(45deg);
+      translate: -38px -30px;
+    }
   }
 
   .button-container {
@@ -198,11 +205,12 @@
     justify-content: flex-end;
   }
 
-  .button1, .button2 {
-      height: 1.2em;
-      width: 1.2em;
-      border-radius: 50%;
-      background: #A6ABAD;
-      margin: 0.1em;
-    }
+  .button1,
+  .button2 {
+    height: 1.2em;
+    width: 1.2em;
+    border-radius: 50%;
+    background: #a6abad;
+    margin: 0.1em;
+  }
 </style>
