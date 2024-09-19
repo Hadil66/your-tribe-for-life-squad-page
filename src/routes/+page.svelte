@@ -1,6 +1,19 @@
 <script>
   export let data;
   import MusicPlayer from '../lib/music-player.svelte';
+  let selectedPerson = null;
+  let showPopup = false;
+
+  // funtie openen popup met data van persoon adhv gegeven id
+    function openPopup(personId) {
+    selectedPerson = data.persons.find(person => person.id === personId);
+    showPopup = true;
+  }
+
+  // functie sluiten popup
+  function closePopup() {
+    showPopup = false;
+  }
 
 </script>
 <h1>vinyl records</h1>
@@ -122,5 +135,7 @@
     border: 0.1em solid var(--primary-dark-color);
     box-shadow: none;
   }
+
+
 </style>
 
