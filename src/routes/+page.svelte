@@ -1,6 +1,7 @@
 <script>
   export let data;
   import MusicPlayer from '../lib/music-player.svelte';
+  import Notification from '../lib/notification.svelte';
 
   let needlePlay = false
   let spinningVinyl = false
@@ -10,6 +11,8 @@
       spinningVinyl = !spinningVinyl
   }
 </script>
+
+<Notification />
 <h1>vinyl records</h1>
 
 <main>
@@ -131,6 +134,7 @@
 
   .album-cover {
     z-index: 2;
+    background-color: white;
   }          
   
   img {
