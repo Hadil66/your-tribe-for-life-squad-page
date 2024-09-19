@@ -1,4 +1,6 @@
 <script>
+  import { tick } from "svelte"; // Import tick for reactive updates
+
   export let data;
   import MusicPlayer from "../lib/music-player.svelte";
   import PersonDetail from "$lib/PersonDetail.svelte";
@@ -15,21 +17,23 @@
     persons = json.data;
   }
 
-  // Combined function to play music and show person details
-  function handlePersonClick(id) {
-    selectedPersonId = id;
-    playPersonTrack();
+  // Function to handle the click, select the person, and play the music
+  async function handlePersonClick(id) {
+    selectedPersonId = id; // First, set the selected person
+
+    await tick(); // Wait for the reactive update to take effect
+
+    playPersonTrack(); // Then play the music
+  }
+
+  function playPersonTrack() {
+    musicPlayerRef.playRandomSong(); // Play a random song from the music player
   }
 
   // Function to close the detail view
   function closePersonDetail() {
     selectedPersonId = null;
-    musicPlayerRef.pause()
-  }
-
-  // Function to play a random song
-  function playPersonTrack() {
-    musicPlayerRef.playRandomSong(); // This assumes the musicPlayer has a playRandomSong method
+    musicPlayerRef.pause();
   }
 </script>
 
@@ -39,7 +43,10 @@
   <ul>
     {#each data.persons as person}
       <li>
-        <button class="vinyl-cover" on:click={() => handlePersonClick(person.id)}>
+        <button
+          class="vinyl-cover"
+          on:click={() => handlePersonClick(person.id)}
+        >
           <img
             src={person.avatar}
             class="album-cover"
@@ -71,12 +78,9 @@
     </div>
     <MusicPlayer bind:this={musicPlayerRef} />
   {/if}
-
 </main>
 
-
 <style>
-
   /* slide in detail component */
 
   /* Add your styling here */
