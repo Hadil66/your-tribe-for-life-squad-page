@@ -87,10 +87,8 @@
 <style>
   /* slide in detail component */
 
-  .popup {
-    display: flex;
-    justify-items: center;
-    width: 100vw;
+  main {
+    overflow: hidden;
   }
 
   /* Add your styling here */

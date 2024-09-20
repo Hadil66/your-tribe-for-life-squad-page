@@ -231,16 +231,30 @@
     width: 100%;
     margin-top: 1em;
     padding: 1em;
+    max-width: 20em;
   }
 
   @media (min-width: 47em) {
+    svg {
+      scale: 1;
+    }
+
+    .recordplayer {
+      height: 22em;
+      width: 25em;
+    }
+
+    .recordplayer .vinyl-record {
+      height: 17em;
+      width: 17em;
+      justify-self: center;
+    }
 
     .recordplayer {
       margin-top: 2em;
     }
 
     .person-info {
-      max-width: 15em;
       margin-top: 0em;
     }
   }
