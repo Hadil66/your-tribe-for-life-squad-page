@@ -1,10 +1,11 @@
 <script>
   export let data;
   import MusicPlayer from '../lib/music-player.svelte';
+  import Notification from '../lib/notification.svelte';
+
   let selectedPerson = null;
   let showPopup = false;
 
-  // funtie openen popup met data van persoon adhv gegeven id
   function openPopup(personId) {
     selectedPerson = data.persons.find(person => person.id === personId);
     showPopup = true;
@@ -23,6 +24,8 @@
       spinningVinyl = !spinningVinyl
   }
 </script>
+
+<Notification />
 <h1>vinyl records</h1>
 
 <main>
@@ -75,8 +78,6 @@
     </div>
   {/if}
 
-  <!--info butt=on -->
-
   <button class="info-button" on:click={() => openPopup(48)}>i</button> 
 
    <!-- Naald --> 
@@ -120,6 +121,7 @@
   </div>
 
     <button class="play-button" on:click="{togglePlay}"> Play </button>  
+
 
 </main>
 
@@ -167,6 +169,7 @@
 
   .album-cover {
     z-index: 2;
+    background-color: white;
   }          
   
   img {
@@ -302,7 +305,9 @@
     }
   }
 
-  /* RECORDPLAYER ANIMATION (FOR THE POP-UP) */
+
+ /* RECORDPLAYER ANIMATION (FOR THE POP-UP) */
+
 
     .recordplayer {
       height: 22em;
