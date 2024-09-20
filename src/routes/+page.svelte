@@ -32,11 +32,14 @@
     PersonDetailRef.togglePlay();
   }
 
-  // Function to close the detail view
-  function closePersonDetail() {
-    selectedPersonId = null;
-    musicPlayerRef.pause();
-  }
+  let vinylcoverFocus = -1; 
+  const handleFocus = (vinylIndex) => {
+    vinylcoverFocus = vinylIndex;
+  };
+  const handleNoFocus = () => {
+    vinylcoverFocus = -1; 
+  };
+
 </script>
 <Notification />
 
@@ -44,6 +47,12 @@
 <main>
   <h2>pick a track</h2>
   <ul>
+    {#each data.persons as person, vinylIndex}
+      <li class:no-focus={vinylcoverFocus !== -1 && vinylcoverFocus !== vinylIndex}>
+        <button class="vinyl-cover" on:focus={() => handleFocus(vinylIndex)} 
+          on:blur={handleNoFocus}
+          aria-label="Focus on {person.name}">
+          <img 
     {#each data.persons as person}
       <li>
 
@@ -169,9 +178,12 @@
     align-items: center;
     list-style: "";
     position: relative;
+    width: 6em;
+    height: 8em;
     --ratio-vinyl: 150px;
     width: var(--ratio-vinyl);
     height: var(--ratio-vinyl);
+
   }
 
   .vinyl-cover {
@@ -180,6 +192,16 @@
     cursor: pointer;
     z-index: 2;
   }
+
+  .vinyl-cover:focus {
+    transform: scale(1.1);
+  }
+
+  li.no-focus {
+    filter: blur(1px) grayscale(90%);
+    /* opacity: 0.7; */
+  }
+
 
   .album-cover {
     z-index: 2;      
@@ -230,71 +252,6 @@
     box-shadow: none;
   }
 
-    /* RECORDPLAYER ANIMATION (FOR THE POP-UP) */
-
-    .recordplayer {
-      height: 22em;
-      width: 25em;
-      background: #403935;
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
-      padding: 1em;
-      border-radius: 12px;
-      margin: 1em;
-    }
-    
-    .recordplayer .vinyl-record {
-      height: 17em;
-      width: 17em;
-      justify-self: center;
-    }
-    
-    .spinningVinyl {
-      animation: spinning-record 3s linear infinite;
-      height: 17em;
-      width: 17em;
-      justify-self: center;
-      position: absolute;
-      background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, var(--primary-dark-color) 4%);
-      border-radius: 50%;
-      border: 0.3em solid var(--primary-dark-color);
-    }
-    
-    @keyframes spinning-record {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .needle-container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      width: 25em;
-    }
-    svg {
-    transition: transform 0.8s ease;
-      transform-origin: top center;
-    }
-    
-    .needlePlay {
-      transform: rotate(45deg);
-    }
-    
-    .button-container {
-      display: flex;
-      flex-direction: row; 
-      gap: 0.5em;
-      margin: 2em 0.5em 0.5em 0.5em;
-      justify-content: flex-end;
-    }
-    
-    .button1, .button2 {
-      height: 1.2em;
-      width: 1.2em;
-      border-radius: 50%;
-      background: #A6ABAD;
-      margin: 0.1em;
-    }
   </style>
+
 
