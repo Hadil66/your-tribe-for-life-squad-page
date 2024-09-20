@@ -111,8 +111,15 @@
     </div>
 
     <section class="person-info">
+      {#if person.nickname}
+      <h2>{person.nickname}</h2>
+      {:else}
       <h2>{person.name}</h2>
-      <p>{person.bio}</p>
+      {/if}
+      <div class="now-playing">
+        <p>By: <br>
+          {person.name} {person.prefix} {person.surname}</p>
+      </div>
     </section>
   </section>
   <!-- Add more details about the person here -->
@@ -232,6 +239,10 @@
     margin-top: 1em;
     padding: 1em;
     max-width: 20em;
+  }
+
+  .person-info h2 {
+    margin-bottom: 0.3em;
   }
 
   @media (min-width: 47em) {
