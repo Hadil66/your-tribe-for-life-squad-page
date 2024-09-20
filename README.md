@@ -12,7 +12,7 @@ Ontwerp en maak met een team een overzicht van jouw tribe met alle online visite
 
 ## Beschrijving
 
-Op onze squadpage zie je een overzicht van onze tribe met alle studenten en docenten. Alle personen zijn gestyled als een soort van album cover. Als je op iemand klikt kan je meer informatie over deze persoon bekijken, en word er een random nummer gespeeld. 
+Op onze squadpage zie je een overzicht van onze tribe, alle studenten van jaar 2 en de docenten. Alle personen zijn gestyled als een soort van album cover. Als je op iemand klikt kan je meer informatie over deze persoon bekijken, en word er een nummer gespeeld. Ook zie je een leuke recordplayer met animatie!
 
 ## Kenmerken
 
