@@ -69,7 +69,6 @@
     align-items: center;
     list-style:"";
     position: relative;
-    background-color: var(--primary-light-color);
 
     --ratio-vinyl: 150px;
     width: var(--ratio-vinyl);
