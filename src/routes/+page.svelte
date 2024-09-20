@@ -5,7 +5,7 @@
   let showPopup = false;
 
   // funtie openen popup met data van persoon adhv gegeven id
-    function openPopup(personId) {
+  function openPopup(personId) {
     selectedPerson = data.persons.find(person => person.id === personId);
     showPopup = true;
   }
@@ -75,7 +75,7 @@
     </div>
   {/if}
 
-  <!--info button -->
+  <!--info butt=on -->
 
   <button class="info-button" on:click={() => openPopup(48)}>i</button> 
 
@@ -247,28 +247,45 @@
 
   .popup-content {
     background: #333;
-    padding: 20px;
+    padding: 2rem;
     width: 80%;
     position: relative;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .popup-content h3 {
+   margin-bottom: 3rem;
+  }
+
+  .popup-content p {
+    color: white;
+    line-height: 2rem;
+  }
+
+  .popup-content a {
     color: white;
   }
 
   .close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1rem;
+    right: 1.5rem;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 50px;
     color: white;
     cursor: pointer;
   }
 
   .person-info {
     display: flex;
+    flex-direction: row; 
     gap: 1rem;
     align-items: center;
-  }
+    margin-bottom: 1rem;
+}
 
   /* mediaqueries */
   @media (max-width: 768px) {
@@ -285,9 +302,7 @@
     }
   }
 
-</style>
-
-    /* RECORDPLAYER ANIMATION (FOR THE POP-UP) */
+  /* RECORDPLAYER ANIMATION (FOR THE POP-UP) */
 
     .recordplayer {
       height: 22em;
