@@ -2,6 +2,7 @@
   import { tick } from "svelte"; // Import tick for reactive updates
 
   export let data;
+  import Notification from "./../lib/notification.svelte";
   import MusicPlayer from "../lib/music-player.svelte";
   import PersonDetail from "$lib/PersonDetail.svelte";
 
@@ -32,15 +33,21 @@
     PersonDetailRef.togglePlay();
   }
 
-  let vinylcoverFocus = -1; 
+  // Function to close the detail view
+  function closePersonDetail() {
+    selectedPersonId = null;
+    musicPlayerRef.pause();
+  }
+
+  let vinylcoverFocus = -1;
   const handleFocus = (vinylIndex) => {
     vinylcoverFocus = vinylIndex;
   };
   const handleNoFocus = () => {
-    vinylcoverFocus = -1; 
+    vinylcoverFocus = -1;
   };
-
 </script>
+
 <Notification />
 
 <h1>vinyl records</h1>
@@ -48,15 +55,10 @@
   <h2>pick a track</h2>
   <ul>
     {#each data.persons as person, vinylIndex}
-      <li class:no-focus={vinylcoverFocus !== -1 && vinylcoverFocus !== vinylIndex}>
-        <button class="vinyl-cover" on:focus={() => handleFocus(vinylIndex)} 
-          on:blur={handleNoFocus}
-          aria-label="Focus on {person.name}">
-          <img 
-    {#each data.persons as person}
-      <li>
-
-        
+      <li
+        class:no-focus={vinylcoverFocus !== -1 &&
+          vinylcoverFocus !== vinylIndex}
+      >
         <button
           class="vinyl-cover"
           on:click={() => handlePersonClick(person.id)}
@@ -76,7 +78,8 @@
               class="album-cover"
               alt="{person.name}'s avatar"
               width="50"
-              height="50">
+              height="50"
+            />
           </div>
         </div>
       </li>
@@ -93,19 +96,6 @@
       <MusicPlayer bind:this={musicPlayerRef} />
     {/if}
   </section>
-
-   <!-- Naald --> 
-  <div class="recordplayer">
-    <div class="vinyl-record" class:spinningVinyl={spinningVinyl} on:click="{togglePlay}">
-    {#each data.persons as person}
-      <div class="vinyl-record-label">
-        <img 
-          src={person.avatar}
-          width="50" 
-          height="50" 
-        />
-      </div>
-    {/each} 
 </main>
 
 <style>
@@ -149,7 +139,7 @@
     border: none;
     cursor: pointer;
   }
-  
+
   h1 {
     display: flex;
     justify-content: center;
@@ -183,7 +173,6 @@
     --ratio-vinyl: 150px;
     width: var(--ratio-vinyl);
     height: var(--ratio-vinyl);
-
   }
 
   .vinyl-cover {
@@ -202,14 +191,14 @@
     /* opacity: 0.7; */
   }
 
-
   .album-cover {
-    z-index: 2;      
-  
+    z-index: 2;
+  }
+
   img {
     border-radius: 0.25em;
     box-shadow: 0 0.5em 0.8em var(--primary-dark-color);
-    object-fit: cover
+    object-fit: cover;
   }
 
   .vinyl-record {
@@ -251,7 +240,4 @@
     border: 0.1em solid var(--primary-dark-color);
     box-shadow: none;
   }
-
-  </style>
-
-
+</style>
