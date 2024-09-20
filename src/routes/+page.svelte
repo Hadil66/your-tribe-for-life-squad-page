@@ -1,49 +1,89 @@
 <script>
+  import { tick } from "svelte"; // Import tick for reactive updates
+
   export let data;
-  import MusicPlayer from '../lib/music-player.svelte';
-  import Notification from '../lib/notification.svelte';
+  import MusicPlayer from "../lib/music-player.svelte";
+  import PersonDetail from "$lib/PersonDetail.svelte";
 
-  let needlePlay = false
-  let spinningVinyl = false
+  let persons = [];
+  let selectedPersonId = null;
+  let musicPlayerRef;
+  let PersonDetailRef;
 
-    function togglePlay() {
-      needlePlay = !needlePlay
-      spinningVinyl = !spinningVinyl
+  // Fetch the list of persons from Directus
+  export async function load({ fetch }) {
+    const url = "https://fdnd.directus.app/items/person/";
+    const response = await fetch(url);
+    const json = await response.json();
+    persons = json.data;
+  }
+
+  function playPersonTrack() {
+    musicPlayerRef.playRandomSong(); // Play a random song from the music player
+  }
+  // Function to handle the click, select the person, and play the music
+  async function handlePersonClick(id) {
+    selectedPersonId = id; // First, set the selected person
+
+    await tick(); // Wait for the reactive update to take effect
+
+    playPersonTrack(); // Then play the music
+
+    PersonDetailRef.togglePlay();
+  }
+
+  // Function to close the detail view
+  function closePersonDetail() {
+    selectedPersonId = null;
+    musicPlayerRef.pause();
   }
 </script>
-
 <Notification />
-<h1>vinyl records</h1>
 
+<h1>vinyl records</h1>
 <main>
   <h2>pick a track</h2>
   <ul>
     {#each data.persons as person}
       <li>
-        <button class="vinyl-cover">
-          <img 
+
+        
+        <button
+          class="vinyl-cover"
+          on:click={() => handlePersonClick(person.id)}
+        >
+          <img
             src={person.avatar}
-            class="album-cover" 
-            alt="{person.name}'s avatar" 
-            width="150" 
-            height="150" 
-          />       
+            class="album-cover"
+            alt="{person.name}'s avatar"
+            width="150"
+            height="150"
+          />
         </button>
         <div class="vinyl-record">
           <div class="vinyl-record-label">
-            <img 
+            <img
               src={person.avatar}
-              alt="{person.name}'s avatar" 
-              width="50" 
-              height="50" 
-            />
+              class="album-cover"
+              alt="{person.name}'s avatar"
+              width="50"
+              height="50">
           </div>
         </div>
       </li>
-    {/each} 
+    {/each}
   </ul>
 
-  <MusicPlayer />
+  <section class="popup">
+    {#if selectedPersonId}
+      <!-- Correctly pass the personId prop to PersonDetail -->
+      <div class="slide-in slide-in-active">
+        <PersonDetail bind:this={PersonDetailRef} personId={selectedPersonId} />
+        <button class="close-btn" on:click={closePersonDetail}>Close</button>
+      </div>
+      <MusicPlayer bind:this={musicPlayerRef} />
+    {/if}
+  </section>
 
    <!-- Naald --> 
   <div class="recordplayer">
@@ -57,43 +97,49 @@
         />
       </div>
     {/each} 
-
-    </div>
-    <div class="needle-container">
-      <svg class:needlePlay={needlePlay} on:click="{() => needlePlay = !needlePlay}"width="66" height="237" viewBox="0 0 66 237" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_d_20_141)">
-        <circle cx="33.2652" cy="56.7315" r="28" transform="rotate(0.1352 33.2652 56.7315)" fill="#A6ACAD" stroke="#3E3D3D"/>
-        <path d="M23.9584 0.0568804L43.75 0.103582L43.702 20.4708L38.0472 20.4574L37.9912 44.2191L47.0388 44.2405L46.9934 63.4762L38.2285 63.4555L37.6601 184.526L41.0342 192.455L29.0752 228.07L14.9557 220.681L29.1633 190.73L29.178 184.506L29.202 174.323L29.4637 63.4348L21.547 63.4161L21.5924 44.1804L29.5091 44.1991L29.5651 20.4374L23.9104 20.4241L23.9584 0.0568804Z" fill="black"/>
-        </g>
-        <defs>
-        <filter id="filter0_d_20_141" x="0.765137" y="0.0568848" width="65" height="236.013" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-        <feOffset dy="4"/>
-        <feGaussianBlur stdDeviation="2"/>
-        <feComposite in2="hardAlpha" operator="out"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_20_141"/>
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_20_141" result="shape"/>
-        </filter>
-        </defs>
-      </svg>
-      <ul class="button-container">
-        <li class="button1"></li>
-        <li class="button2"></li>
-      </ul>
-    </div>
-  </div>
-
-    <button class="play-button" on:click="{togglePlay}"> Play </button>  
-
-
 </main>
 
-
-
 <style>
-  
+  /* slide in detail component */
+
+  main {
+    overflow: hidden;
+  }
+
+  /* Add your styling here */
+  .slide-in {
+    height: 70vh;
+    border-radius: 10px;
+    transform: translateY(110%);
+    transition: transform 0.3s ease-out;
+
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    z-index: 100;
+  }
+
+  .slide-in-active {
+    transform: translateY(0);
+  }
+
+  @media (min-width: 47em) {
+    .slide-in {
+      width: 80vw;
+      justify-items: center;
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: red;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+  }
   
   h1 {
     display: flex;
@@ -121,9 +167,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    list-style:"";
+    list-style: "";
     position: relative;
-
     --ratio-vinyl: 150px;
     width: var(--ratio-vinyl);
     height: var(--ratio-vinyl);
@@ -137,9 +182,7 @@
   }
 
   .album-cover {
-    z-index: 2;
-    background-color: white;
-  }          
+    z-index: 2;      
   
   img {
     border-radius: 0.25em;
@@ -154,10 +197,17 @@
 
     position: absolute;
 
-    background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, var(--primary-dark-color) 4%);
+    background: repeating-radial-gradient(
+      circle at center,
+      #1a1919,
+      #1d1c1c 3%,
+      var(--primary-dark-color) 4%
+    );
     border-radius: 50%;
     border: 0.3em solid var(--primary-dark-color);
-    transition: transform 3s linear, left 1.5s linear;
+    transition:
+      transform 3s linear,
+      left 1.5s linear;
   }
 
   .vinyl-cover:hover + .vinyl-record {
