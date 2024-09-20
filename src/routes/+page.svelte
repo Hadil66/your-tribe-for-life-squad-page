@@ -29,10 +29,8 @@
 
     playPersonTrack(); // Then play the music
 
-    PersonDetailRef.togglePlay()
+    PersonDetailRef.togglePlay();
   }
-
-
 
   // Function to close the detail view
   function closePersonDetail() {
@@ -74,35 +72,49 @@
     {/each}
   </ul>
 
-  {#if selectedPersonId}
-    <!-- Correctly pass the personId prop to PersonDetail -->
-    <div class="slide-in slide-in-active">
-      
-      <PersonDetail bind:this={PersonDetailRef} personId={selectedPersonId} />
-      <button class="close-btn" on:click={closePersonDetail}>Close</button>
-    </div>
-    <MusicPlayer bind:this={musicPlayerRef} />
-  {/if}
+  <section class="popup">
+    {#if selectedPersonId}
+      <!-- Correctly pass the personId prop to PersonDetail -->
+      <div class="slide-in slide-in-active">
+        <PersonDetail bind:this={PersonDetailRef} personId={selectedPersonId} />
+        <button class="close-btn" on:click={closePersonDetail}>Close</button>
+      </div>
+      <MusicPlayer bind:this={musicPlayerRef} />
+    {/if}
+  </section>
 </main>
 
 <style>
   /* slide in detail component */
 
+  .popup {
+    display: flex;
+    justify-items: center;
+    width: 100vw;
+  }
+
   /* Add your styling here */
   .slide-in {
-    height: 50vh;
-    transform: translateY(100%);
+    height: 70vh;
+    border-radius: 10px;
+    transform: translateY(110%);
     transition: transform 0.3s ease-out;
-    z-index: 100;
 
     position: fixed;
     bottom: 0;
     background-color: white;
-    width: 100vw;
+    z-index: 100;
   }
 
   .slide-in-active {
     transform: translateY(0);
+  }
+
+  @media (min-width: 47em) {
+    .slide-in {
+      width: 80vw;
+      justify-items: center;
+    }
   }
 
   .close-btn {
