@@ -61,7 +61,9 @@
       >
         <button
           class="vinyl-cover"
-          on:click={() => handlePersonClick(person.id)}
+          on:click={() => handlePersonClick(person.id)} on:focus={() => handleFocus(vinylIndex)} 
+          on:blur={handleNoFocus}
+          aria-label="Focus on {person.name}"
         >
           <img
             src={person.avatar}
