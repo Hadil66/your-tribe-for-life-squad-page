@@ -1,25 +1,36 @@
 # Squad Page - team 1
 
+Ontwerp en maak met een team een overzicht van jouw tribe met alle online visitekaartjes, op basis van een headless CMS en een framework.
 
 
-## Lokaal gebruiken
+## Inhoudsopgave 📓
+- [Beschrijving](#Beschrijving)
+- [Kenmerken](#Kenmerken)
+- [Installatie](#Installatie)
+- [Bronnen](#Bronnen)
 
-1. Om ons project op jouw device te gebruiken, moet je deze lokaal clonen.
-2. Open de folder van dit project
-3. Open de terminal en typ `npm install`
-4. Als je geen errors krijgt, typ dan `npm run dev`
-5. Klik op de link voor de localhost
+
+## Beschrijving
+
+Op onze squadpage zie je een overzicht van onze tribe met alle studenten en docenten. Alle personen zijn gestyled als een soort van album cover. Als je op iemand klikt kan je meer informatie over deze persoon bekijken, en word er een random nummer gespeeld. 
+
+## Kenmerken
+
+Dit project is gebouwed met Sveltekit als framework en Directus als CMS.
+
+## Installatie
+
+1. Clone deze repo
+2. Open in een code editor
+3. Run de command `npm install` in de terminal
+4. Run de command `npm run dev` in de terminal
+5. Klik op de localhost link
 6. Have fun!
 
-## 🧞 Commands
+### Bronnen
 
-Hier zie je een aantal handige commands:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:5173`      |
-| `npm run build`           | Build your production site                       |
+- [Sveltekit Docs](https://kit.svelte.dev/)
+- [Getting started with Directus and Sveltekit](https://docs.directus.io/blog/getting-started-directus-sveltekit.html)
 
 
 

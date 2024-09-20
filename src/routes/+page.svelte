@@ -38,6 +38,7 @@
     musicPlayerRef.pause();
   }
 </script>
+<Notification />
 
 <h1>vinyl records</h1>
 <main>
@@ -45,6 +46,8 @@
   <ul>
     {#each data.persons as person}
       <li>
+
+        
         <button
           class="vinyl-cover"
           on:click={() => handlePersonClick(person.id)}
@@ -64,8 +67,7 @@
               class="album-cover"
               alt="{person.name}'s avatar"
               width="50"
-              height="50"
-            />
+              height="50">
           </div>
         </div>
       </li>
@@ -82,6 +84,19 @@
       <MusicPlayer bind:this={musicPlayerRef} />
     {/if}
   </section>
+
+   <!-- Naald --> 
+  <div class="recordplayer">
+    <div class="vinyl-record" class:spinningVinyl={spinningVinyl} on:click="{togglePlay}">
+    {#each data.persons as person}
+      <div class="vinyl-record-label">
+        <img 
+          src={person.avatar}
+          width="50" 
+          height="50" 
+        />
+      </div>
+    {/each} 
 </main>
 
 <style>
@@ -125,7 +140,7 @@
     border: none;
     cursor: pointer;
   }
-
+  
   h1 {
     display: flex;
     justify-content: center;
@@ -154,29 +169,29 @@
     align-items: center;
     list-style: "";
     position: relative;
-    height: 150px;
-    width: 150px;
+    --ratio-vinyl: 150px;
+    width: var(--ratio-vinyl);
+    height: var(--ratio-vinyl);
   }
 
   .vinyl-cover {
     border: none;
-    background-color: transparent;
+    background-color: bisque;
     cursor: pointer;
     z-index: 2;
   }
 
   .album-cover {
-    z-index: 2;
-  }
-
+    z-index: 2;      
+  
   img {
     border-radius: 0.25em;
     box-shadow: 0 0.5em 0.8em var(--primary-dark-color);
-    object-fit: cover;
+    object-fit: cover
   }
 
   .vinyl-record {
-    --ratio-vinyl: 7em;
+    --ratio-vinyl: 6em;
     width: var(--ratio-vinyl);
     height: var(--ratio-vinyl);
 
@@ -195,13 +210,11 @@
       left 1.5s linear;
   }
 
-  /*  hover album cover*/
   .vinyl-cover:hover + .vinyl-record {
     transform: rotate(360deg);
     left: 6.5em;
   }
 
-  /* unhover image */
   .vinyl-cover + .vinyl-record {
     transform: rotate(0deg);
     left: 0;
@@ -216,4 +229,72 @@
     border: 0.1em solid var(--primary-dark-color);
     box-shadow: none;
   }
-</style>
+
+    /* RECORDPLAYER ANIMATION (FOR THE POP-UP) */
+
+    .recordplayer {
+      height: 22em;
+      width: 25em;
+      background: #403935;
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding: 1em;
+      border-radius: 12px;
+      margin: 1em;
+    }
+    
+    .recordplayer .vinyl-record {
+      height: 17em;
+      width: 17em;
+      justify-self: center;
+    }
+    
+    .spinningVinyl {
+      animation: spinning-record 3s linear infinite;
+      height: 17em;
+      width: 17em;
+      justify-self: center;
+      position: absolute;
+      background: repeating-radial-gradient(circle at center, #1a1919, #1d1c1c 3%, var(--primary-dark-color) 4%);
+      border-radius: 50%;
+      border: 0.3em solid var(--primary-dark-color);
+    }
+    
+    @keyframes spinning-record {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .needle-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      width: 25em;
+    }
+    svg {
+    transition: transform 0.8s ease;
+      transform-origin: top center;
+    }
+    
+    .needlePlay {
+      transform: rotate(45deg);
+    }
+    
+    .button-container {
+      display: flex;
+      flex-direction: row; 
+      gap: 0.5em;
+      margin: 2em 0.5em 0.5em 0.5em;
+      justify-content: flex-end;
+    }
+    
+    .button1, .button2 {
+      height: 1.2em;
+      width: 1.2em;
+      border-radius: 50%;
+      background: #A6ABAD;
+      margin: 0.1em;
+    }
+  </style>
+

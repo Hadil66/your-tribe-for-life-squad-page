@@ -19,6 +19,7 @@
 body {
     width: 100vw;
     background-color: bisque;
+    overflow-x: hidden;
 }
 
 h1,
